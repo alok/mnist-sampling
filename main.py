@@ -166,7 +166,7 @@ for frac in np.linspace(0, 1, 101):
     model.train()
     print(f"Fraction: {frac}")
 
-    for epochs in range(5):
+    for epochs in range(10):
         for _, (i, (x, y)) in zip(range(subset_size), enumerate(train_loader)):
             pred = model(x)
             loss = F.nll_loss(pred, y)
@@ -176,3 +176,6 @@ for frac in np.linspace(0, 1, 101):
             loss.backward()
             optimizer.step()
         test_losses.append(test(model, test_loader))
+
+np.save('test_losses.npy', np.array(test_losses))
+
